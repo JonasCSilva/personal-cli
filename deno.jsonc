@@ -1,0 +1,13 @@
+{
+  "tasks": {
+    "run": "deno run -A index.ts",
+    "compile": "deno compile -A -o cf index.ts"
+  },
+  "fmt": {
+    "options": {
+      "singleQuote": true,
+      "semiColons": false,
+      "lineWidth": 130
+    }
+  }
+}
