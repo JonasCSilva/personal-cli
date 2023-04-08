@@ -1,6 +1,7 @@
 import { Command } from 'https://deno.land/x/cliffy@v0.25.7/command/mod.ts'
 import { checkFolders } from './check-folders/index.ts'
 import { checkRepositories } from './check-repositories/index.ts'
+import { zipOneDrive } from './zip-onedrive/7zip.ts'
 
 await new Command()
   .name('Personal CLI')
@@ -18,5 +19,8 @@ await new Command()
   .command('cr', 'Check repositories.')
   .arguments('[path:string]')
   .action(async (_options, arg) => await checkRepositories(arg))
+  // Child command 3
+  .command('zo', 'Zip OneDrive folder.')
+  .action(() => zipOneDrive())
   // Parse
   .parse(Deno.args)
