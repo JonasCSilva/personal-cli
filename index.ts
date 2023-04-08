@@ -1,21 +1,10 @@
-import { checkPath } from './functions.ts'
+import { Command } from 'https://deno.land/x/cliffy@v0.25.7/command/mod.ts'
+import { checkFolders } from './check-folders/index.ts'
 
-export async function main() {
-  const basePath = Deno.env.get('USERPROFILE')!
-  
-  const results: string[] = []
-  
-  await checkPath(results, basePath)
-  
-  console.log()
-  
-  if (results.length > 0) {
-    for (const result of results) {
-      console.log(result)
-    }
-  } else {
-    console.log('No files found!')
-  }
-  
-  console.log()
-}
+await new Command()
+  .name('Check folders')
+  .version('0.1.0')
+  .description('Check folders for files')
+  .command('cf', 'Check folders.')
+  .action(async () => await checkFolders())
+  .parse(Deno.args)
