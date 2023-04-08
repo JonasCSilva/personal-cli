@@ -3,10 +3,14 @@ import { checkFolders } from './check-folders/index.ts'
 import { checkRepositories } from './check-repositories/index.ts'
 
 await new Command()
-  // Main command
-  .name('Check folders')
+  .name('Personal CLI')
   .version('0.1.0')
-  .description('Check folders for files')
+  .versionOption('-v, --version', 'Show the version number.')
+  .description('CLI for personal use')
+  // Main command
+  .action(function (this: Command) {
+    console.log(this.getHelp())
+  })
   // Child command 1
   .command('cf', 'Check folders.')
   .action(async () => await checkFolders())
