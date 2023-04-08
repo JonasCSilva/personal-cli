@@ -1,7 +1,7 @@
 import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 import { ignoreFiles, ignorePaths } from './ignore.ts'
 
-export async function checkPath(currentPath: string, basePath?: string): Promise<void> {
+export async function checkPath(results: string[], currentPath: string, basePath?: string): Promise<void> {
   basePath ??= currentPath
 
   const dir = Deno.readDir(currentPath)
@@ -12,8 +12,8 @@ export async function checkPath(currentPath: string, basePath?: string): Promise
     if (entry.isSymlink) continue
     if (isIgnoredPath(join(currentPath, entry.name), basePath)) continue
     if (isIgnoredFile(entry.name)) continue
-    if (entry.isFile) console.log(entryPath)
-    if (entry.isDirectory) await checkPath(entryPath, basePath)
+    if (entry.isFile) results.push(entryPath)
+    if (entry.isDirectory) await checkPath(results, entryPath, basePath)
   }
 }
 
