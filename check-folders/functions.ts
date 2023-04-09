@@ -1,5 +1,6 @@
 import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 import { ignoreFiles, ignorePaths } from './ignore.ts'
+import { red } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
 
 export async function checkPath(results: string[], currentPath: string, basePath?: string): Promise<void> {
   basePath ??= currentPath
@@ -12,7 +13,7 @@ export async function checkPath(results: string[], currentPath: string, basePath
     if (entry.isSymlink) continue
     if (isIgnoredPath(join(currentPath, entry.name), basePath)) continue
     if (isIgnoredFile(entry.name)) continue
-    if (entry.isFile) results.push(entryPath)
+    if (entry.isFile) results.push(red(entryPath))
     if (entry.isDirectory) await checkPath(results, entryPath, basePath)
   }
 }
@@ -26,6 +27,4 @@ const isIgnoredPath = (entryPath: string, basePath: string): boolean => {
   return false
 }
 
-const isIgnoredFile = (entryName: string): boolean => {
-  return ignoreFiles.includes(entryName)
-}
+const isIgnoredFile = (entryName: string): boolean => ignoreFiles.includes(entryName)

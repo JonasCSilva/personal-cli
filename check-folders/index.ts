@@ -1,5 +1,5 @@
 import { checkPath } from './functions.ts'
-import { green, red } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
+import { green } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
 
 export async function checkFolders() {
   const basePath = Deno.env.get('USERPROFILE')!
@@ -8,15 +8,11 @@ export async function checkFolders() {
 
   await checkPath(results, basePath)
 
-  console.log()
+  let string = results.join()
 
-  if (results.length > 0) {
-    for (const result of results) {
-      console.log(red(result))
-    }
-  } else {
-    console.log(green('No files found!'))
+  if (!results.length) {
+    string = green('No files found!')
   }
 
-  console.log()
+  console.log(`\n${string}\n`)
 }
