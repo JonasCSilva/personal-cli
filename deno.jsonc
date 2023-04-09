@@ -2,7 +2,7 @@
   "tasks": {
     "run": "deno run --allow-env --allow-read --allow-run cli.ts",
     "compile": "deno compile --allow-env --allow-read --allow-run -o pc cli.ts",
-    "install": "deno install --allow-env --allow-read --allow-run -f cli.ts -n pc"
+    // "install": "deno install --allow-env --allow-read --allow-run -f cli.ts -n pc"
   },
   "fmt": {
     "options": {

@@ -21,7 +21,7 @@ export const ignorePaths: string[] = [
   '.gradle',
   '.gitconfig',
   'OneDrive',
-  'OneDrive.zip',
+  join('Desktop', 'OneDrive.zip'),
   join('Documents', 'BioWare'),
   join('Documents', 'flutter'),
   join('Documents', 'PowerShell'),
