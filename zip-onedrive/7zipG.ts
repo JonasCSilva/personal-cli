@@ -1,5 +1,5 @@
-import { green, red } from 'https://deno.land/std@0.170.0/fmt/colors.ts'
-import { join } from 'https://deno.land/std@0.181.0/path/mod.ts'
+import { green, red } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
+import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 
 export async function zipOneDrive() {
   const oneDriveFolder = Deno.env.get('OneDrive')!

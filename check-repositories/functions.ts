@@ -1,4 +1,4 @@
-import { join } from 'https://deno.land/std@0.181.0/path/mod.ts'
+import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 import { bold, red } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
 
 export type GetStrings = (repositoriesPath: string, dir: AsyncIterable<Deno.DirEntry>) => Promise<string[]>

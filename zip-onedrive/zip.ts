@@ -1,4 +1,4 @@
-import { join } from 'https://deno.land/std@0.181.0/path/mod.ts'
+import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 import { Uint8ArrayReader, Uint8ArrayWriter, ZipWriter } from 'https://deno.land/x/zipjs@v2.6.83/index.js'
 
 const zipFileWriter = new Uint8ArrayWriter()
