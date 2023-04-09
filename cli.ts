@@ -23,4 +23,4 @@ await new Command()
   .command('zo', 'Zip OneDrive folder.')
   .action(() => zipOneDrive())
   // Parse
-  .parse(Deno.args)
+  .parse()

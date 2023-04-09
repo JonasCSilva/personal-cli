@@ -1,5 +1,6 @@
 import { join } from 'https://deno.land/std@0.181.0/path/mod.ts'
-import { Fn } from './types.ts'
+
+export type Fn = (repositoriesPath: string, dir: AsyncIterable<Deno.DirEntry>) => Promise<string[]>
 
 export const fn: Fn = async (repositoriesPath, dir) => {
   const promises = []

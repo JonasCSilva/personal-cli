@@ -1,5 +1,5 @@
 import { join } from 'https://deno.land/std@0.181.0/path/mod.ts'
-import { fn } from './lib/fn1.ts'
+import { fn } from './fn1.ts'
 
 export async function checkRepositories(argPath?: string) {
   const home = Deno.env.get('USERPROFILE')!
