@@ -1,7 +1,7 @@
 import { Command } from 'https://deno.land/x/cliffy@v0.25.7/command/mod.ts'
 import { checkFolders } from './check-folders/index.ts'
 import { checkRepositories } from './check-repositories/index.ts'
-import { zipOneDrive } from './zip-onedrive/7zipG.ts'
+import { zipOneDrive } from './zip-onedrive/7zip.ts'
 
 await new Command()
   .name('Personal CLI')
