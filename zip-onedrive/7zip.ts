@@ -1,27 +1,45 @@
-import { spawn } from 'node:child_process'
+import { green, red, yellow } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
+import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 
-const child = spawn('7z', [
-  'u',
-  'OneDrive',
-  'C:\\Users\\OUTSI\\OneDrive\\*',
-  '-tzip',
-  '-bsp1',
-  '-uq0',
-  '-x!desktop.ini',
-  '-x!Cofre Pessoal.lnk',
-  '-x!.849C9593-D756-4E56-8D6E-42412F2A707B',
-])
+const oneDriveFolder = Deno.env.get('OneDrive')!
+const home = Deno.env.get('USERPROFILE')!
 
-child.stdout.setEncoding('utf8')
-child.stdout.on('data', function (data) {
-  console.log('stdout: ' + data)
+const child = Deno.run({
+  cmd: [
+    '7z',
+    'u',
+    join(home, 'OneDrive'),
+    join(oneDriveFolder, '*'),
+    '-tzip',
+    '-bsp1',
+    '-uq0',
+    '-sccUTF-8',
+    '-x!desktop.ini',
+    '-x!Cofre Pessoal.lnk',
+    '-x!.849C9593-D756-4E56-8D6E-42412F2A707B',
+  ],
+  stdout: 'piped',
+  stderr: 'piped',
 })
 
-child.stderr.setEncoding('utf8')
-child.stderr.on('data', function (data) {
-  console.log('stderr: ' + data)
-})
+const encoder = new TextEncoder()
 
-child.on('close', function (code) {
-  console.log('closing code: ' + code)
-})
+const lines = child.stdout.readable.pipeThrough(new TextDecoderStream())
+
+for await (const line of lines) {
+  let string = line
+  const index = line.indexOf('%')
+  if (index !== -1) {
+    string = `${line.substring(0, index - 2)}${yellow(line.substring(index - 2, index + 1))}${line.substring(index + 1)}`
+  } else if (line.includes('Everything is Ok')) {
+    string = green(line)
+  } else {
+    let index = line.indexOf('Scan WARNINGS')
+    index = index !== -1 ? index : line.indexOf('WARNINGS')
+    if (index !== -1) {
+      string = `${line.substring(0, index)}${red(line.substring(index))}`
+    }
+  }
+
+  Deno.stdout.write(encoder.encode(string))
+}
