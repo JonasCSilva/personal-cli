@@ -5,7 +5,7 @@ import { zipOneDrive } from './zip-onedrive/7zip.ts'
 
 await new Command()
   .name('pc')
-  .version('0.1.1')
+  .version('0.1.2')
   .versionOption('-v, --version', 'Show the version number.', function (this: Command) {
     console.log(`\nVersion: ${this.getVersion()}\n`)
   })
