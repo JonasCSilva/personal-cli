@@ -4,10 +4,12 @@ import { checkRepositories } from './check-repositories/index.ts'
 import { zipOneDrive } from './zip-onedrive/7zip.ts'
 
 await new Command()
-  .name('Personal CLI')
-  .version('0.1.0')
-  .versionOption('-v, --version', 'Show the version number.')
-  .description('CLI for personal use')
+  .name('pc')
+  .version('0.1.1')
+  .versionOption('-v, --version', 'Show the version number.', function (this: Command) {
+    console.log(`\nVersion: ${this.getVersion()}\n`)
+  })
+  .description('Custom CLI for personal use')
   // Main command
   .action(function (this: Command) {
     console.log(this.getHelp())
