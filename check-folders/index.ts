@@ -4,11 +4,9 @@ import { green } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
 export async function checkFolders() {
   const basePath = Deno.env.get('USERPROFILE')!
 
-  const results: string[] = []
+  const results = await checkPath(basePath)
 
-  await checkPath(results, basePath)
-
-  let string = results.join()
+  let string = results.join('\n')
 
   if (!results.length) {
     string = green('No files found!')

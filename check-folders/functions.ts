@@ -2,9 +2,9 @@ import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 import { ignoreFiles, ignorePaths } from './ignore.ts'
 import { red } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
 
-export async function checkPath(results: string[], currentPath: string, basePath?: string): Promise<void> {
-  basePath ??= currentPath
+type CheckPath = (currentPath: string, basePath?: string, results?: string[]) => Promise<string[]>
 
+export const checkPath: CheckPath = async (currentPath, basePath = currentPath, results = []) => {
   const dir = Deno.readDir(currentPath)
 
   for await (const entry of dir) {
@@ -14,17 +14,18 @@ export async function checkPath(results: string[], currentPath: string, basePath
     if (isIgnoredPath(join(currentPath, entry.name), basePath)) continue
     if (isIgnoredFile(entry.name)) continue
     if (entry.isFile) results.push(red(entryPath))
-    if (entry.isDirectory) await checkPath(results, entryPath, basePath)
+    if (entry.isDirectory) {
+      results = await checkPath(entryPath, basePath, results)
+    }
   }
+
+  return results
 }
 
 const isIgnoredPath = (entryPath: string, basePath: string): boolean => {
-  for (const ignorePath of ignorePaths) {
-    if (join(basePath, ignorePath) === entryPath) {
-      return true
-    }
-  }
-  return false
+  return ignorePaths.some((ignorePath) => join(basePath, ignorePath) === entryPath)
 }
 
-const isIgnoredFile = (entryName: string): boolean => ignoreFiles.includes(entryName)
+const isIgnoredFile = (entryName: string): boolean => {
+  return ignoreFiles.includes(entryName)
+}
