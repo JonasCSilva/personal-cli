@@ -1,4 +1,4 @@
-import { green, red, yellow } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
+import { blue, bold, green, red, underline, yellow } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
 import { join, resolve } from 'https://deno.land/std@0.182.0/path/mod.ts'
 
 export async function zipOneDrive(path?: string) {
@@ -7,6 +7,9 @@ export async function zipOneDrive(path?: string) {
 
   const filesPath = join(oneDriveFolder, '*')
   const archivePath = join(path ? resolve(path) : join(home, 'Desktop'), 'OneDrive.zip')
+
+  console.log(blue(`\n${bold('From:')} ${underline(filesPath)}`))
+  console.log(blue(`${bold('To:')} ${underline(archivePath)}\n`))
 
   const child = Deno.run({
     cmd: [
@@ -31,6 +34,14 @@ export async function zipOneDrive(path?: string) {
   const lines = child.stdout.readable.pipeThrough(new TextDecoderStream())
 
   for await (const line of lines) {
+    if (line.includes('Copyright')) continue
+    if (line.includes('Characteristics = Zip64')) {
+      console.log('Scanning the drive:')
+      continue
+    }
+    if (line.includes('Updating archive:')) continue
+    if (line.includes('Creating archive:')) continue
+
     let string = line
     const index = line.indexOf('%')
     if (index !== -1) {
