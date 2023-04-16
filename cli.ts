@@ -23,6 +23,7 @@ await new Command()
   .action(async (_options, arg) => await checkRepositories(arg))
   // Child command 3
   .command('zo', 'Zip OneDrive folder.')
-  .action(async () => await zipOneDrive())
+  .arguments('[path:string]')
+  .action(async (_options, arg) => await zipOneDrive(arg))
   // Parse
   .parse()

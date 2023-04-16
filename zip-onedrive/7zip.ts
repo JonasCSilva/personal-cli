@@ -1,19 +1,22 @@
 import { green, red, yellow } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
-import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
+import { join, resolve } from 'https://deno.land/std@0.182.0/path/mod.ts'
 
-export async function zipOneDrive() {
+export async function zipOneDrive(path?: string) {
   const oneDriveFolder = Deno.env.get('OneDrive')!
   const home = Deno.env.get('USERPROFILE')!
+
+  const filesPath = join(oneDriveFolder, '*')
+  const archivePath = join(path ? resolve(path) : join(home, 'Desktop'), 'OneDrive.zip')
 
   const child = Deno.run({
     cmd: [
       '7z',
       'u',
-      join(home, 'Desktop', 'OneDrive'),
-      join(oneDriveFolder, '*'),
+      archivePath,
+      filesPath,
+      '-uq0',
       '-tzip',
       '-bsp1',
-      '-uq0',
       '-sccUTF-8',
       '-x!desktop.ini',
       '-x!Cofre Pessoal.lnk',
