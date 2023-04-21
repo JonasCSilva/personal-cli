@@ -1,6 +1,10 @@
 import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
-import { ignoreFiles, ignorePaths } from './ignore.ts'
+import ignore from './ignore.json' assert { type: 'json' }
 import { red } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
+
+const { files: ignoreFiles, paths: rawIgnorePaths } = ignore
+
+const ignorePaths = rawIgnorePaths.map((rawIgnorePath) => Array.isArray(rawIgnorePath) ? join(...rawIgnorePath) : rawIgnorePath)
 
 type CheckPath = (currentPath: string, basePath?: string, results?: string[]) => Promise<string[]>
 
@@ -23,7 +27,7 @@ export const checkPath: CheckPath = async (currentPath, basePath = currentPath, 
 }
 
 const isIgnoredPath = (entryPath: string, basePath: string): boolean => {
-  return ignorePaths.some((ignorePath) => join(basePath, ignorePath) === entryPath)
+  return ignorePaths.some((ignorePath): boolean => join(basePath, ignorePath) === entryPath)
 }
 
 const isIgnoredFile = (entryName: string): boolean => {
