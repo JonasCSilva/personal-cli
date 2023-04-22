@@ -1,18 +1,8 @@
 import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
-import defaultConfig from '../config.json' assert { type: 'json' }
 import { red } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
+import { getConfig } from '../getConfig.ts'
 
-const execPath = Deno.execPath()
-
-const configPath = join(execPath, '..', 'pc.config')
-
-let config = defaultConfig
-
-try {
-  config = JSON.parse(await Deno.readTextFile(configPath))
-} catch (error) {
-  if (!(error instanceof Deno.errors.NotFound)) throw error
-}
+const config = await getConfig()
 
 const { files: ignoreFiles, paths: rawIgnorePaths } = config.cf.ignore
 
