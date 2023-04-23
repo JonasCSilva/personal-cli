@@ -1,8 +1,8 @@
 {
   "tasks": {
-    "run": "deno run --allow-env --allow-read --allow-run cli.ts",
-    "compile": "deno compile --allow-env --allow-read --allow-run -o pc cli.ts",
-    "install": "deno run --allow-env --allow-read --allow-write --allow-run install.ts"
+    "run": "deno run --allow-env --allow-read --allow-run index.ts",
+    "compile": "deno compile --allow-env --allow-read --allow-run -o pc index.ts",
+    "install": "pwsh -c ./lib/install"
   },
   "fmt": {
     "options": {
