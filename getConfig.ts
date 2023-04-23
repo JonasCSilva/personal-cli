@@ -1,11 +1,11 @@
 import defaultConfig from './config.json' assert { type: 'json' }
-import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
+import { dirname, join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 import { Config } from './types.ts'
 
 export async function getConfig(): Promise<Config> {
   const execPath = Deno.execPath()
 
-  const configPath = join(execPath, '..', 'pc.config')
+  const configPath = join(dirname(execPath), 'pc.config')
 
   let config = defaultConfig
 
