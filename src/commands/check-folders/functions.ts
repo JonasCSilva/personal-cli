@@ -1,6 +1,6 @@
 import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 import { red } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
-import { getConfig } from '../lib/getConfig.ts'
+import { getConfig } from '../../lib/getConfig.ts'
 
 const config = await getConfig()
 
