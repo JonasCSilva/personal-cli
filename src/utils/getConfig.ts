@@ -1,4 +1,4 @@
-import defaultConfig from '../lib/config.json' assert { type: 'json' }
+import defaultConfig from './config.json' assert { type: 'json' }
 import { dirname, join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 import { Config } from './types.ts'
 

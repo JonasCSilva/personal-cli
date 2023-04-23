@@ -1,3 +1,5 @@
 deno.lock
 *.exe
 *.zip
+dist/
+.env
