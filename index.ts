@@ -33,7 +33,8 @@ await new Command()
   // Child command 4
   .command('rs', 'Read script.')
   .arguments('<name:string>')
-  .action(async (_options, arg) => await readScript(arg))
+  .option("-v, --verbose", "Show full file.")
+  .action(async (options, arg) => await readScript(arg, options))
   // Child command 5
   .command('b', 'Backup.')
   .action(async () => await backup())
