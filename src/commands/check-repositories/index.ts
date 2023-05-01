@@ -1,10 +1,8 @@
 import { join } from 'https://deno.land/std@0.182.0/path/mod.ts'
 import { getStrings } from './functions.ts'
 
-export async function checkRepositories(argPath?: string) {
+export async function checkRepositories(argPath = 'repositories') {
   const home = Deno.env.get('USERPROFILE')!
-
-  argPath ??= 'repositories'
 
   const repositoriesPath = join(home, argPath)
 
