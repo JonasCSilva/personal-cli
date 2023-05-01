@@ -10,5 +10,17 @@
       "semiColons": false,
       "lineWidth": 130
     }
+  },
+  "imports": {
+    "utils/": "./src/utils/",
+    "fmt/": "https://deno.land/std@0.185.0/fmt/",
+    "encoding/": "https://deno.land/std@0.185.0/encoding/",
+    "dotenv/": "https://deno.land/std@0.185.0/dotenv/",
+    "path": "https://deno.land/std@0.185.0/path/mod.ts",
+    "fs": "https://deno.land/std@0.185.0/fs/mod.ts",
+    "datetime": "https://deno.land/std@0.185.0/datetime/mod.ts",
+    "oak": "https://deno.land/x/oak@v6.5.0/mod.ts",
+    "zipjs": "https://deno.land/x/zipjs@v2.6.83/index.js",
+    "cliffy": "https://deno.land/x/cliffy@v0.25.7/command/mod.ts"
   }
 }

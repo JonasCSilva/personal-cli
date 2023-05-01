@@ -1,5 +1,5 @@
-import { basename, dirname, join } from 'https://deno.land/std@0.182.0/path/mod.ts'
-import { blue, bold, red } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
+import { basename, dirname, join } from 'path'
+import { blue, bold, red } from 'fmt/colors.ts'
 
 export async function readScript(fileName: string, { verbose }: { verbose?: true }) {
   const execPath = Deno.execPath()

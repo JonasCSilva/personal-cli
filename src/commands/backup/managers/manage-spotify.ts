@@ -1,6 +1,6 @@
-import 'https://deno.land/std@0.181.0/dotenv/load.ts'
-import { Application, Router } from 'https://deno.land/x/oak@v6.5.0/mod.ts'
-import { encode } from 'https://deno.land/std@0.93.0/encoding/base64.ts'
+import 'dotenv/load.ts'
+import { Application, Router } from 'oak'
+import { encode } from 'encoding/base64.ts'
 
 const CLIENT_ID = Deno.env.get('SPOTIFY_CLIENT_ID')!
 const CLIENT_SECRET = Deno.env.get('SPOTIFY_CLIENT_SECRET')!

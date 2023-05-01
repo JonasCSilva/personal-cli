@@ -1,4 +1,4 @@
-import { Command } from 'https://deno.land/x/cliffy@v0.25.7/command/mod.ts'
+import { Command } from 'cliffy'
 import { checkFolders } from './src/commands/check-folders/index.ts'
 import { checkRepositories } from './src/commands/check-repositories/index.ts'
 import { showScripts } from './src/commands/show-scripts/index.ts'

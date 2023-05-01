@@ -1,5 +1,5 @@
-import { basename, dirname, extname, join, parse } from 'https://deno.land/std@0.182.0/path/mod.ts'
-import { bold, green, red } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
+import { basename, dirname, extname, join, parse } from 'path'
+import { bold, green, red } from 'fmt/colors.ts'
 
 export async function showScripts() {
   const execPath = Deno.execPath()

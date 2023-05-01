@@ -1,5 +1,5 @@
-import { ensureDir } from 'https://deno.land/std@0.181.0/fs/mod.ts'
-import { join } from 'https://deno.land/std@0.181.0/path/mod.ts'
+import { ensureDir } from 'fs'
+import { join } from 'path'
 import { timeString } from './get-time-string.ts'
 
 type ZipData = { name: string; body: ReadableStream<Uint8Array> }[]

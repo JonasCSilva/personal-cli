@@ -1,5 +1,5 @@
-import { basename, join, relative } from 'https://deno.land/std@0.182.0/path/mod.ts'
-import { Uint8ArrayReader, Uint8ArrayWriter, ZipWriter } from 'https://deno.land/x/zipjs@v2.6.83/index.js'
+import { basename, join, relative } from 'path'
+import { Uint8ArrayReader, Uint8ArrayWriter, ZipWriter } from 'zipjs'
 
 async function recursive(zipWriter: ZipWriter<Uint8Array>, basePath: string, path: string = basePath) {
   const dir = Deno.readDir(path)

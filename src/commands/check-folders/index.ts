@@ -1,5 +1,5 @@
 import { checkPath } from './functions.ts'
-import { green } from 'https://deno.land/std@0.182.0/fmt/colors.ts'
+import { green } from 'fmt/colors.ts'
 
 export async function checkFolders() {
   const basePath = Deno.env.get('USERPROFILE')!

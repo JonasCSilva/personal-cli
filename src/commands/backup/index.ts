@@ -1,5 +1,5 @@
-import 'https://deno.land/std@0.181.0/dotenv/load.ts'
-import { join } from 'https://deno.land/std@0.181.0/path/mod.ts'
+import 'dotenv/load.ts'
+import { join } from 'path'
 import backupAirtable from './backuppers/backup-airtable.ts'
 import backupDatoCMS from './backuppers/backup-datocms.ts'
 import backupGitHub from './backuppers/backup-github.ts'

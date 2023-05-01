@@ -1,5 +1,5 @@
-import { ensureDir } from 'https://deno.land/std@0.182.0/fs/ensure_dir.ts'
-import { extname, join } from 'https://deno.land/std@0.182.0/path/mod.ts'
+import { ensureDir } from 'fs'
+import { extname, join } from 'path'
 import { timeString } from '../utils/get-time-string.ts'
 
 export default async function backup(path: string, oldPath: string, folderName: string): Promise<void> {

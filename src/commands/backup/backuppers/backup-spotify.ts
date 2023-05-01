@@ -1,4 +1,4 @@
-import { encode } from 'https://deno.land/std@0.93.0/encoding/base64.ts'
+import { encode } from 'encoding/base64.ts'
 import { writeFile } from '../utils/backuppers-functions.ts'
 
 type RawTracks = {
