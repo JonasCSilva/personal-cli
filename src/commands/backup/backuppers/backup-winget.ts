@@ -1,4 +1,7 @@
 import { writeFile } from '../utils/backuppers-functions.ts'
+import { getConfig } from 'utils/getConfig.ts'
+
+const config = await getConfig()
 
 export default async function backup(path: string): Promise<void> {
   const command = new Deno.Command('winget', { args: ['list' /* , '|', 'Sort-Object' */], stdout: 'piped' })
@@ -11,7 +14,11 @@ export default async function backup(path: string): Promise<void> {
 
   const outStr = decoder.decode(stdout)
 
-  const array = outStr.split('\r\n').filter((_) => _ && !_.includes('-----------'))
+  const rawArray = outStr.split('\r\n').filter((_) => _ && !_.includes('-----------'))
+
+  const array = rawArray.filter((line) => {
+    return config.b.ignore.every((ignore) => !line.includes(ignore))
+  })
 
   const rawIndexes = array.map((_) => [_.indexOf('…'), _.lastIndexOf('…')])
 

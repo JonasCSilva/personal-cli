@@ -1,4 +1,47 @@
 {
+  "b": {
+    "ignore": [
+      "Microsoft Visual C++",
+      "Realtek High Definition Audio Driver",
+      "NVIDIA HD Audio Driver",
+      "NVIDIA PhysX System Software",
+      "NVIDIA Graphics Driver",
+      "Microsoft .NET",
+      "NVIDIA Control Panel",
+      "Xbox Game Speech Window",
+      "Xbox Identity Provider",
+      "Xbox Game Bar",
+      "Microsoft Store",
+      "Windows Voice Recorder",
+      "Windows Maps",
+      "Feedback Hub",
+      "Windows Camera",
+      "Windows Calculator",
+      "Windows Clock",
+      "Microsoft Photos",
+      "Microsoft Pay",
+      "Snip & Sketch",
+      "Microsoft People",
+      "3D Viewer",
+      "Microsoft Tips",
+      "Get Help",
+      "Gaming Services",
+      "MSN Weather",
+      "Cortana",
+      "Microsoft Edge",
+      "Mixed Reality Portal",
+      "Store Experience Host",
+      "Xbox TCUI",
+      "Xbox Console Companion",
+      "Phone Link",
+      "Movies & TV",
+      "Microsoft OneDrive",
+      "Microsoft GameInput",
+      "vs_CoreEditorFonts",
+      "Epic Online Services",
+      "NVIDIA FrameView"
+    ]
+  },
   "cf": {
     "ignore": {
       "files": [
