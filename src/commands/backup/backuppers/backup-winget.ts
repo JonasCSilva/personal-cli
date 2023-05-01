@@ -1,22 +1,15 @@
 import { writeFile } from '../utils/backuppers-functions.ts'
 
-// Add ignore
-
-/*
-Windows Package Manager Source (winget)
-Telegram Desktop
-
-indexof …
-*/
-
 export default async function backup(path: string): Promise<void> {
-  const child = Deno.run({ cmd: ['winget', 'list' /* , '|', 'Sort-Object' */], stdout: 'piped' })
+  const command = new Deno.Command('winget', { args: ['list' /* , '|', 'Sort-Object' */], stdout: 'piped' })
+
+  const child = command.spawn()
 
   const decoder = new TextDecoder()
 
-  const output = await child.output()
+  const { stdout } = await child.output()
 
-  const outStr = decoder.decode(output)
+  const outStr = decoder.decode(stdout)
 
   const array = outStr.split('\r\n').filter((_) => _ && !_.includes('-----------')).map((_) =>
     _.replaceAll('…', '… ').split(/\s{2,}/g).filter((_) => _ && !_.includes('\b'))

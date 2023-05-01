@@ -1,13 +1,15 @@
 import { writeFile } from '../utils/backuppers-functions.ts'
 
 export default async function backup(path: string): Promise<void> {
-  const child = Deno.run({ cmd: ['pwsh', '-c', 'scoop', 'export'], stdout: 'piped' })
+  const command = new Deno.Command('pwsh', { args: ['-c', 'scoop', 'export'], stdout: 'piped' })
+
+  const child = command.spawn()
 
   const decoder = new TextDecoder()
 
-  const output = await child.output()
+  const { stdout } = await child.output()
 
-  const outStr = decoder.decode(output)
+  const outStr = decoder.decode(stdout)
 
   const data = JSON.parse(outStr)
 

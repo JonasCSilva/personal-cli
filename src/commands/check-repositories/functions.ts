@@ -7,19 +7,22 @@ export const getStrings: GetStrings = async (repositoriesPath, dir) => {
   const promises = []
 
   for await (const dirEntry of dir) {
-    const p = Deno.run({
-      cmd: ['git', '-C', join(repositoriesPath, dirEntry.name), 'fetch', '--all'],
+    const command = new Deno.Command('git', {
+      args: ['-C', join(repositoriesPath, dirEntry.name), 'fetch', '--all'],
     })
 
-    const promise = p.status().then(async () => {
-      const cmd = Deno.run({
-        cmd: ['git', '-C', join(repositoriesPath, dirEntry.name), 'status', '-b', '--porcelain'],
+    const child = command.spawn()
+
+    const promise = child.status.then(async () => {
+      const command = new Deno.Command('git', {
+        args: ['-C', join(repositoriesPath, dirEntry.name), 'status', '-b', '--porcelain'],
         stdout: 'piped',
-        stderr: 'piped',
       })
 
-      const output = await cmd.output()
-      const outStr = new TextDecoder().decode(output)
+      const child = command.spawn()
+
+      const { stdout } = await child.output()
+      const outStr = new TextDecoder().decode(stdout)
 
       const lines = outStr.split('\n').filter((_) => _)
 
