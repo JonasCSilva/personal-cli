@@ -1,4 +1,5 @@
 import { writeFile } from '../utils/backuppers-functions.ts'
+import { getEnvValue } from '../utils/get-env-value.ts'
 
 type Task = {
   repeat: unknown
@@ -16,8 +17,11 @@ type RawTask = Task & {
 }
 
 export default async function backup(path: string): Promise<void> {
+  const HABITICA_USER = await getEnvValue('HABITICA_USER')
+  const HABITICA_KEY = await getEnvValue('HABITICA_KEY')
+
   const requestConfig: RequestInit = {
-    headers: { 'x-api-user': Deno.env.get('HABITICA_USER')!, 'x-api-key': Deno.env.get('HABITICA_KEY')! },
+    headers: { 'x-api-user': HABITICA_USER, 'x-api-key': HABITICA_KEY },
   }
 
   const result = await fetch('https://habitica.com/api/v3/tasks/user', requestConfig).then((response) => response.json())

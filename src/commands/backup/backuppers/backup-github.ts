@@ -1,9 +1,12 @@
 import { writeZips } from '../utils/backuppers-functions.ts'
+import { getEnvValue } from '../utils/get-env-value.ts'
 
 export default async function backup(path: string): Promise<void> {
+  const GITHUB_TOKEN = await getEnvValue('GITHUB_TOKEN')
+
   const requestInit: RequestInit = {
     headers: {
-      Authorization: `Bearer ${Deno.env.get('GITHUB_TOKEN')!}`,
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
       'X-GitHub-Api-Version': '2022-11-28',
     },
   }

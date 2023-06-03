@@ -7,7 +7,7 @@ import { backup } from './src/commands/backup/index.ts'
 
 await new Command()
   .name('pc')
-  .version('0.1.2')
+  .version('0.1.3')
   .versionOption(
     '-v, --version',
     'Show the version number.',
@@ -33,7 +33,7 @@ await new Command()
   // Child command 4
   .command('rs', 'Read script.')
   .arguments('<name:string>')
-  .option("-v, --verbose", "Show full file.")
+  .option('-v, --verbose', 'Show full file.')
   .action(async (options, arg) => await readScript(arg, options))
   // Child command 5
   .command('b', 'Backup.')

@@ -9,7 +9,7 @@ export async function readScript(fileName: string, { verbose }: { verbose?: true
     const file = await Deno.readTextFile(join(binPath, `${fileName}.ps1`))
 
     if (verbose) {
-      console.log(blue(`\n${file}\n`))
+      console.log(blue(`\n${file.slice(1)}\n`))
       Deno.exit()
     }
 

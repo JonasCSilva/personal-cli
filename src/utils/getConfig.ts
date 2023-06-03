@@ -10,7 +10,9 @@ export async function getConfig(): Promise<Config> {
   let config = defaultConfig
 
   try {
-    config = JSON.parse(await Deno.readTextFile(configPath))
+    const json = await Deno.readTextFile(configPath)
+
+    config = JSON.parse(json)
   } catch (error) {
     if (!(error instanceof Deno.errors.NotFound)) throw error
   }
