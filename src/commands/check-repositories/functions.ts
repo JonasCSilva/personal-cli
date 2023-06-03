@@ -1,7 +1,7 @@
 import { join } from 'path'
 import { bold, red } from 'fmt/colors.ts'
 
-export type GetStrings = (repositoriesPath: string, dir: AsyncIterable<Deno.DirEntry>) => Promise<string[]>
+type GetStrings = (repositoriesPath: string, dir: AsyncIterable<Deno.DirEntry>) => Promise<string[]>
 
 export const getStrings: GetStrings = async (repositoriesPath, dir) => {
   const promises = []
@@ -35,7 +35,9 @@ export const getStrings: GetStrings = async (repositoriesPath, dir) => {
   return Promise.all(promises)
 }
 
-function getString(entryName: string, lines: string[]) {
+type GetString = (entryName: string, lines: string[]) => string
+
+const getString: GetString = (entryName, lines) => {
   let string = bold(`${entryName}:`)
 
   for (const [index, line] of lines.entries()) {

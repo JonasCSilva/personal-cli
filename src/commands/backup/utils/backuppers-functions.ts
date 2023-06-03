@@ -6,6 +6,7 @@ type ZipData = { name: string; body: ReadableStream<Uint8Array> }[]
 
 export const writeFile = async (name: string, path: string, data: unknown, includeMetadata = true): Promise<void> => {
   const folderPath = join(path, name)
+
   await ensureDir(folderPath)
 
   name = `${name}-${timeString}`
@@ -20,6 +21,7 @@ export const writeFile = async (name: string, path: string, data: unknown, inclu
 
 export const writeZips = async (name: string, path: string, data: ZipData): Promise<void> => {
   const folderPath = join(path, name, name + '-' + timeString)
+
   await ensureDir(folderPath)
 
   if (!data) {

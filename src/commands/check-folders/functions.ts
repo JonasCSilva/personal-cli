@@ -6,7 +6,7 @@ const config = await getConfig()
 
 const { files: ignoreFiles, paths: rawIgnorePaths } = config.cf.ignore
 
-const ignorePaths = rawIgnorePaths.map((rawIgnorePath: string | string[]) =>
+const ignorePaths = rawIgnorePaths.map((rawIgnorePath: string | string[]): string =>
   Array.isArray(rawIgnorePath) ? join(...rawIgnorePath) : rawIgnorePath
 )
 

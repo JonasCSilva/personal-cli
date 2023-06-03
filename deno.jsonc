@@ -2,7 +2,7 @@
   "tasks": {
     "run": "deno run --allow-env --allow-read --allow-run --allow-net --allow-write index.ts",
     "compile": "deno compile --allow-env --allow-read --allow-run --allow-net --allow-write -o pc index.ts",
-    "install": "pwsh -c ./lib/install"
+    "install": "pwsh -c ./src/utils/install"
   },
   "fmt": {
     "options": {

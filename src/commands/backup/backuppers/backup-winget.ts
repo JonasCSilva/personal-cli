@@ -4,7 +4,7 @@ import { getConfig } from 'utils/getConfig.ts'
 const config = await getConfig()
 
 export default async function backup(path: string): Promise<void> {
-  const command = new Deno.Command('winget', { args: ['list' /* , '|', 'Sort-Object' */], stdout: 'piped' })
+  const command = new Deno.Command('winget', { args: ['list'], stdout: 'piped' })
 
   const child = command.spawn()
 
