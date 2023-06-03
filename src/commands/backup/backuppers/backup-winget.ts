@@ -14,7 +14,9 @@ export default async function backup(path: string): Promise<void> {
 
   const outStr = decoder.decode(stdout)
 
-  const rawArray = outStr.split('\r\n').filter((_) => _ && !_.includes('-----------'))
+  const firstLetterIndex = outStr.match('[a-zA-Z]')!.index!
+
+  const rawArray = outStr.slice(firstLetterIndex).split('\r\n').filter((_) => _ && !_.includes('-----------'))
 
   const array = rawArray.filter((line) => {
     return config.b.ignore.every((ignore) => !line.includes(ignore))
@@ -31,10 +33,12 @@ export default async function backup(path: string): Promise<void> {
 
   indexes.sort()
 
+  if (indexes.length !== 2) indexes.unshift(39)
+
   const arrays = array.map((_) => {
     const first = _.substring(0, indexes[0] + 1).trim()
 
-    const second = _.substring(indexes[0] + 2, indexes[1] + 1).trim()
+    const second = _.substring(indexes[0] + 1, indexes[1] + 1).trim()
 
     const rawThirdAndFourth = _.substring(indexes[1] + 2).trim()
     const thirdAndFourth = rawThirdAndFourth.split(/\s{2,}/g)

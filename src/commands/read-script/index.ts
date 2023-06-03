@@ -1,29 +1,31 @@
-import { basename, dirname, join } from 'path'
+import { join } from 'path'
 import { blue, bold, red } from 'fmt/colors.ts'
+import { getBinPath } from '../../utils/getPaths.ts'
 
 export async function readScript(fileName: string, { verbose }: { verbose?: true }) {
-  const execPath = Deno.execPath()
-
-  const oneDrivePath = Deno.env.get('OneDrive')!
-
-  const exec = basename(execPath)
-
-  const binFolder = exec === 'deno.exe' ? join(oneDrivePath, 'bin') : dirname(execPath)
+  const binPath = getBinPath()
 
   try {
-    const file = await Deno.readTextFile(join(binFolder, `${fileName}.ps1`))
+    const file = await Deno.readTextFile(join(binPath, `${fileName}.ps1`))
 
     if (verbose) {
       console.log(blue(`\n${file}\n`))
-    } else {
-      const lines = file.split('\r\n').filter((_) => _).map((_) => _.trim())
-
-      const line = lines.find((_) => _.startsWith('$command'))!
-
-      console.log(blue(`\n${line.slice(line.indexOf('"') + 1, -1)}\n`))
+      Deno.exit()
     }
+
+    const rawLines = file.split('\r\n')
+
+    const lines = rawLines.filter((_) => _).map((_) => _.trim())
+
+    const line = lines.find((_) => _.startsWith('$command'))!
+
+    const commandStartIndex = line.indexOf('"')
+
+    console.log(blue(`\n${line.slice(commandStartIndex + 1, -1)}\n`))
   } catch (error) {
-    if (!(error instanceof Deno.errors.NotFound)) throw (error)
+    if (!(error instanceof Deno.errors.NotFound)) {
+      throw (error)
+    }
 
     console.log(red(bold('\nFile not found\n')))
   }

@@ -1,22 +1,19 @@
-import { basename, dirname, extname, join, parse } from 'path'
+import { extname, parse } from 'path'
 import { bold, green, red } from 'fmt/colors.ts'
+import { getBinPath } from '../../utils/getPaths.ts'
 
 export async function showScripts() {
-  const execPath = Deno.execPath()
+  const binPath = getBinPath()
 
-  const oneDrivePath = Deno.env.get('OneDrive')!
-
-  const exec = basename(execPath)
-
-  const binFolder = exec === 'deno.exe' ? join(oneDrivePath, 'bin') : dirname(execPath)
-
-  const dir = Deno.readDir(binFolder)
+  const dir = Deno.readDir(binPath)
 
   const scripts: string[] = []
 
   for await (const entry of dir) {
     if (extname(entry.name) === '.ps1') {
-      scripts.push(parse(entry.name).name)
+      const scriptName = parse(entry.name).name
+
+      scripts.push(scriptName)
     }
   }
 
