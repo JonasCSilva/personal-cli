@@ -4,18 +4,16 @@ import { timeString } from './get-time-string.ts'
 
 type ZipData = { name: string; body: ReadableStream<Uint8Array> }[]
 
-export const writeFile = async (name: string, path: string, data: unknown, includeMetadata = true): Promise<void> => {
+export const writeFile = async (name: string, path: string, data: unknown): Promise<void> => {
   const folderPath = join(path, name)
 
   await ensureDir(folderPath)
 
   name = `${name}-${timeString}`
 
-  const value = includeMetadata ? { name, data } : data
-
   await Deno.writeTextFile(
     join(folderPath, `${name}.json`),
-    JSON.stringify(value, undefined, 2),
+    JSON.stringify(data, undefined, 2),
   )
 }
 

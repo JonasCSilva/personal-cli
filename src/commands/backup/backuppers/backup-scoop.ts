@@ -13,5 +13,5 @@ export default async function backup(path: string): Promise<void> {
 
   const data = JSON.parse(outStr)
 
-  await writeFile('scoop', path, data, false)
+  await writeFile('scoop', path, data)
 }
