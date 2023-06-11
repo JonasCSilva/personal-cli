@@ -1,9 +1,9 @@
 import { join } from 'path'
 import { blue, bold, red } from 'fmt/colors.ts'
-import { getBinPath } from '../../utils/getPaths.ts'
+import { getBinPath } from 'utils/getPaths.ts'
 
 export async function readScript(fileName: string, { verbose }: { verbose?: true }) {
-  const binPath = getBinPath()
+  const binPath = await getBinPath()
 
   try {
     const file = await Deno.readTextFile(join(binPath, `${fileName}.ps1`))

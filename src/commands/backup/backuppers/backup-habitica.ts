@@ -1,5 +1,5 @@
 import { writeFile } from '../utils/backuppers-functions.ts'
-import { getEnvValue } from '../utils/get-env-value.ts'
+import { getEnvValue } from 'utils/get-env-value.ts'
 
 type Task = {
   repeat: unknown

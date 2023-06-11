@@ -1,9 +1,10 @@
 import { basename, dirname, join } from 'path'
+import { getEnvValue } from 'utils/get-env-value.ts'
 
-export function getBackupPath() {
+export async function getBackupPath() {
   const execPath = Deno.execPath()
 
-  const oneDrivePath = Deno.env.get('OneDrive')!
+  const oneDrivePath = await getEnvValue('OneDrive')!
 
   const execName = basename(execPath)
 
@@ -12,10 +13,10 @@ export function getBackupPath() {
   return backupPath
 }
 
-export function getBinPath() {
+export async function getBinPath() {
   const execPath = Deno.execPath()
 
-  const oneDrivePath = Deno.env.get('OneDrive')!
+  const oneDrivePath = await getEnvValue('OneDrive')!
 
   const execName = basename(execPath)
 

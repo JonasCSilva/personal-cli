@@ -11,6 +11,7 @@
   },
   "imports": {
     "utils/": "./src/utils/",
+    "commands/": "./src/commands/",
     "fmt/": "https://deno.land/std@0.185.0/fmt/",
     "encoding/": "https://deno.land/std@0.185.0/encoding/",
     "dotenv/": "https://deno.land/std@0.185.0/dotenv/",

@@ -1,8 +1,9 @@
 import { join } from 'path'
 import { getStrings } from './functions.ts'
+import { getEnvValue } from 'utils/get-env-value.ts'
 
 export async function checkRepositories(argPath = 'repositories') {
-  const home = Deno.env.get('USERPROFILE')!
+  const home = await getEnvValue('USERPROFILE')!
 
   const repositoriesPath = join(home, argPath)
 

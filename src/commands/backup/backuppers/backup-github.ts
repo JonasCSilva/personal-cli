@@ -1,5 +1,5 @@
 import { writeZips } from '../utils/backuppers-functions.ts'
-import { getEnvValue } from '../utils/get-env-value.ts'
+import { getEnvValue } from 'utils/get-env-value.ts'
 
 export default async function backup(path: string): Promise<void> {
   const GITHUB_TOKEN = await getEnvValue('GITHUB_TOKEN')

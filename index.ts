@@ -1,9 +1,9 @@
 import { Command } from 'cliffy'
-import { checkFolders } from './src/commands/check-folders/index.ts'
-import { checkRepositories } from './src/commands/check-repositories/index.ts'
-import { showScripts } from './src/commands/show-scripts/index.ts'
-import { readScript } from './src/commands/read-script/index.ts'
-import { backup } from './src/commands/backup/index.ts'
+import { checkFolders } from 'commands/check-folders/index.ts'
+import { checkRepositories } from 'commands/check-repositories/index.ts'
+import { showScripts } from 'commands/show-scripts/index.ts'
+import { readScript } from 'commands/read-script/index.ts'
+import { backup } from 'commands/backup/index.ts'
 
 await new Command()
   .name('pc')

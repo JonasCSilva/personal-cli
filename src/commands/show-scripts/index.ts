@@ -1,9 +1,9 @@
 import { extname, parse } from 'path'
 import { bold, green, red } from 'fmt/colors.ts'
-import { getBinPath } from '../../utils/getPaths.ts'
+import { getBinPath } from 'utils/getPaths.ts'
 
 export async function showScripts() {
-  const binPath = getBinPath()
+  const binPath = await getBinPath()
 
   const dir = Deno.readDir(binPath)
 
