@@ -35,9 +35,9 @@ export default async function backup(path: string): Promise<void> {
 
   const requestConfig2: RequestInit = { headers: { Authorization: `Bearer ${access_token}` } }
 
-  const response2 = await fetch('https://api.spotify.com/v1/me/tracks?offset=0&limit=50', requestConfig2)
+  const response = await fetch('https://api.spotify.com/v1/me/tracks?offset=0&limit=50', requestConfig2)
 
-  const { total, items } = await response2.json()
+  const { total, items } = await response.json()
 
   const totalRequests = Math.floor(total / 50)
 
